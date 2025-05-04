@@ -1,5 +1,6 @@
 ﻿using BLL.Abstractions;
 using BLL.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -14,6 +15,7 @@ namespace API.Controllers
             _userService = userService;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetUsers()
         {
             try
@@ -27,6 +29,7 @@ namespace API.Controllers
             }
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetUsersId(Guid id)
         {
             try
@@ -40,6 +43,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostUsers(UserDTO user)
         {
             try
@@ -52,7 +56,22 @@ namespace API.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+        [HttpPost()]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginInfoDTO login)
+        {
+            try
+            {
+                var result = await _userService.CheckLogin(login.email, login.password).ConfigureAwait(false);
+                return result.token == null ? Unauthorized() : Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> PutUsers(UserDTO user)
         {
             try
@@ -67,6 +86,7 @@ namespace API.Controllers
 
         }
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUsers(Guid id)
         {
             try

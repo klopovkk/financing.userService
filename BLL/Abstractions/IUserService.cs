@@ -14,5 +14,7 @@ namespace BLL.Abstractions
         public Task DeleteUser(Guid id);
         public Task AddUser(UserDTO user);
         public Task UpdateUser(UserDTO user);
+        public Task<TokenInfoDTO> CheckLogin(string Email, string Password);
+
     }
 }
