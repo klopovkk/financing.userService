@@ -9,6 +9,7 @@ public class MapperProfiler : IMapperProfiler
     public User Map(UserDTO userDTO)
     {
         var tempUser = new User();
+        tempUser.Id = userDTO.Id;
         tempUser.CreatedAt = userDTO.CreatedAt;
         tempUser.Email = userDTO.Email;
         tempUser.Name = userDTO.Name;
@@ -20,6 +21,7 @@ public class MapperProfiler : IMapperProfiler
     public UserDTO Map(User user)
     {
         var tempUser = new UserDTO();
+        tempUser.Id = user.Id;
         tempUser.CreatedAt = user.CreatedAt;
         tempUser.Email = user.Email;
         tempUser.Name = user.Name;
@@ -35,6 +37,7 @@ public class MapperProfiler : IMapperProfiler
         foreach (var user in users)
         {
             var tempUser = new UserDTO();
+            tempUser.Id = user.Id;
             tempUser.CreatedAt = user.CreatedAt;
             tempUser.Email = user.Email;
             tempUser.Name = user.Name;
@@ -51,6 +54,7 @@ public class MapperProfiler : IMapperProfiler
         foreach (var user in userDTOs)
         {
             var tempUser = new UserDTO();
+            tempUser.Id = user.Id;
             tempUser.CreatedAt = user.CreatedAt;
             tempUser.Email = user.Email;
             tempUser.Name = user.Name;

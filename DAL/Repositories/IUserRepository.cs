@@ -11,10 +11,9 @@ namespace DAL.Repositories
     public interface IUserRepository
     {
         Task<ICollection<User>> Get(Expression<Func<User, bool>> filter = null);
-        Task<User> GetById(int id);
+        Task<User> GetById(Guid id);
         Task Create(User entity, string createBody = null);
         Task Update(User entity, string modifieBody = null);
-        Task Delete(int id);
-        Task SoftDelete(int id);
+        Task Delete(Guid id);
     }
 }

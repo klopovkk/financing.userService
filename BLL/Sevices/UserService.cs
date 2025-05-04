@@ -24,7 +24,7 @@ namespace BLL.Sevices
         {
             await _userRepository.Create(_mapper.Map(user)).ConfigureAwait(false);
         }
-        public async Task DeleteUser(int id)
+        public async Task DeleteUser(Guid id)
         {
             await _userRepository.Delete(id).ConfigureAwait(false);
         }
@@ -35,7 +35,7 @@ namespace BLL.Sevices
 
             return UserDTOs;
         }
-        public async Task<UserDTO> GetUserById(int id)
+        public async Task<UserDTO> GetUserById(Guid id)
         {
             var user = await _userRepository.GetById(id).ConfigureAwait(false);
             var dto = _mapper.Map(user);

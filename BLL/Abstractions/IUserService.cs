@@ -9,9 +9,9 @@ namespace BLL.Abstractions
 {
     public interface IUserService
     {
-        public Task<UserDTO> GetUserById(int id);
+        public Task<UserDTO> GetUserById(Guid id);
         public Task<ICollection<UserDTO>> GetAllUsers();
-        public Task DeleteUser(int id);
+        public Task DeleteUser(Guid id);
         public Task AddUser(UserDTO user);
         public Task UpdateUser(UserDTO user);
     }
