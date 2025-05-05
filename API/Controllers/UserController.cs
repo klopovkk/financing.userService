@@ -1,7 +1,9 @@
 ﻿using BLL.Abstractions;
 using BLL.DTO;
+using BLL.Sevices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -34,6 +36,14 @@ namespace API.Controllers
         {
             try
             {
+                var authHeader = Request.Headers["Authorization"].FirstOrDefault().ToString();
+                var claims = AuthService.GetClaims(authHeader.Substring("Bearer ".Length).Trim());
+                var tokenId = claims.First(claim => claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+                if (id.ToString() != tokenId)
+                {
+                    return StatusCode(403, "Forbidden");
+
+                }
                 var user = await _userService.GetUserById(id).ConfigureAwait(false);
                 return Ok(user);
             }
@@ -76,6 +86,14 @@ namespace API.Controllers
         {
             try
             {
+                var authHeader = Request.Headers["Authorization"].FirstOrDefault().ToString();
+                var claims = AuthService.GetClaims(authHeader.Substring("Bearer ".Length).Trim());
+                var tokenId = claims.First(claim => claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+                if (user.Id.ToString() != tokenId)
+                {
+                    return StatusCode(403, "Access Denied");
+
+                }
                 await _userService.UpdateUser(user).ConfigureAwait(false);
                 return Ok();
             }
@@ -91,6 +109,14 @@ namespace API.Controllers
         {
             try
             {
+                var authHeader = Request.Headers["Authorization"].FirstOrDefault().ToString();
+                var claims = AuthService.GetClaims(authHeader.Substring("Bearer ".Length).Trim());
+                var tokenId = claims.First(claim => claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+                if (id.ToString() != tokenId)
+                {
+                    return StatusCode(403, "Access Denied");
+
+                }
                 await _userService.DeleteUser(id).ConfigureAwait(false);
                 return Ok();
             }

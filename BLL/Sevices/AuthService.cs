@@ -34,5 +34,13 @@ namespace BLL.Sevices
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public static IEnumerable<Claim> GetClaims(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            return jwtToken.Claims;
+        }
     }
 }
