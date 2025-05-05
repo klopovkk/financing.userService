@@ -16,20 +16,20 @@ namespace API.Controllers
         {
             _userService = userService;
         }
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetUsers()
-        {
-            try
-            {
-                var list = await _userService.GetAllUsers();
-                return Ok(list);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An error occurred while processing your request.");
-            }
-        }
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<IActionResult> GetUsers()
+        //{
+        //    try
+        //    {
+        //        var list = await _userService.GetAllUsers();
+        //        return Ok(list);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "An error occurred while processing your request.");
+        //    }
+        //}
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetUsersId(Guid id)
@@ -53,7 +53,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        [Authorize]
+        [Route("register")]
         public async Task<IActionResult> PostUsers(UserDTO user)
         {
             try
