@@ -15,6 +15,9 @@ namespace DAL.Models
         [Column("name")]
         public string Name { get; set; }
 
+        [Column("role")]
+        public string Role { get; set; }
+
         [Column("email")]
         
         public string Email { get; set; }

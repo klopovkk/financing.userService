@@ -14,6 +14,7 @@ public class MapperProfiler : IMapperProfiler
         tempUser.Email = userDTO.Email;
         tempUser.Name = userDTO.Name;
         tempUser.Password = userDTO.Password;
+        tempUser.Role = userDTO.Role;
 
         return tempUser;
     }
@@ -26,6 +27,7 @@ public class MapperProfiler : IMapperProfiler
         tempUser.Email = user.Email;
         tempUser.Name = user.Name;
         tempUser.Password = user.Password;
+        tempUser.Role = user.Role;
 
         return tempUser;
     }
@@ -42,6 +44,7 @@ public class MapperProfiler : IMapperProfiler
             tempUser.Email = user.Email;
             tempUser.Name = user.Name;
             tempUser.Password = user.Password;
+            tempUser.Role = user.Role;
             userDTOs.Add(tempUser);
         }
 
@@ -59,6 +62,7 @@ public class MapperProfiler : IMapperProfiler
             tempUser.Email = user.Email;
             tempUser.Name = user.Name;
             tempUser.Password = user.Password;
+            tempUser.Role = user.Role;
             userDTOs.Add(tempUser);
         }
 

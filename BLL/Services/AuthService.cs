@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using DAL.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -14,11 +15,12 @@ namespace BLL.Sevices
 {
     public class AuthService
     {
-        public static string GenerateJSONWebToken(IConfiguration config, Guid id)
+        public static string GenerateJSONWebToken(IConfiguration config, UserDTO user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));

@@ -61,7 +61,7 @@ namespace BLL.Sevices
             }
             else
             {
-                var token =  AuthService.GenerateJSONWebToken(_config, user.Id);
+                var token =  AuthService.GenerateJSONWebToken(_config, user);
                 return new TokenInfoDTO(user.Id, token);
             }
         }
